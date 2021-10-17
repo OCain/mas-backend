@@ -28,7 +28,7 @@ routes.get('/user/:id/', (request, response) => {
 
 routes.post('/user', userController.create);
 
-routes.post('/activity', () => console.log('Activity route'));
+routes.post('/activy', () => console.log('Activy route'));
 routes.post('/courseunit', () => console.log('Course Unit route'));
 
 export default routes;

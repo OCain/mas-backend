@@ -1,5 +1,4 @@
 import {getRepository} from 'typeorm'
-import {hash} from 'bcryptjs'
 import {CourseUnit} from '../models/CourseUnit'
 
 interface CourseUnitData {

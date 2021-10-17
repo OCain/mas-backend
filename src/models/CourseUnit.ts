@@ -1,6 +1,6 @@
-import {Column, CreateDateColumn, Entity, OneToMany, PrimaryColumn} from 'typeorm';
+import {Column, Entity, OneToMany, PrimaryColumn} from 'typeorm';
 import {v4 as uuid} from 'uuid';
-import { Activity } from './Activity';
+import { Activy } from './Activy';
 
 
 @Entity("course_unit")
@@ -15,8 +15,8 @@ class CourseUnit {
     @PrimaryColumn()
     readonly id: string;
 
-    @OneToMany(() => Activity, activity => activity.course_unit)
-    activities: Activity[];
+    @OneToMany(() => Activy, activy => activy.course_unit)
+    activies: Activy[];
 
     @Column()
     name: string;
