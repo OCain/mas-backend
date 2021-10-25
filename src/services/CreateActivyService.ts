@@ -11,15 +11,21 @@ class CreateActivyService {
     
     public async execute({name, activy_date, course_unit_id}: ActivyData) {
         
-        const activitiesRepository = getRepository(Activy);
+        const activiesRepository = getRepository(Activy);
 
-        const activy = activitiesRepository.create({
+        const checkActivyExists = await activiesRepository.findOne({name, course_unit_id});
+
+        if (checkActivyExists) {
+            throw new Error('Activy to Course Unit already exists.');
+        }
+
+        const activy = activiesRepository.create({
             name,
             activy_date,
             course_unit_id
         });
         
-        await activitiesRepository.save(activy);
+        await activiesRepository.save(activy);
         
         return activy;
     }

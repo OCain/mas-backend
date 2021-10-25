@@ -12,6 +12,12 @@ class CreateCourseUnitService {
         
         const courseUnitsRepository = getRepository(CourseUnit);
 
+        const checkCourseUnitExists = await courseUnitsRepository.findOne({name});
+
+        if (checkCourseUnitExists) {
+            throw new Error('Course Unit already exists.');
+        }
+
         const courseUnit = courseUnitsRepository.create({
             name,
             description
