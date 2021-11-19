@@ -33,8 +33,13 @@ routes.get('/user/:id/', (request, response) => {
     });
 });
 
-routes.post('/user', userController.create);
 routes.post('/auth', authenticateController.create);
+
+routes.get('/user', userController.show);
+routes.get('/activy', activyController.show);
+routes.get('/courseunit', courseUnitController.show);
+
+routes.post('/user', userController.create);
 routes.post('/activy', authenticated, activyController.create);
 routes.post('/courseunit', authenticated, courseUnitController.create);
 
