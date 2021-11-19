@@ -5,12 +5,6 @@ import { ActivyController } from './controller/ActivyController';
 import { CourseUnitController } from './controller/CourseUnitController';
 import authenticated from './middlewares/authenticated'
 
-interface UserRequest {
-    name: string,
-    email: string,
-    password: string
-}
-
 const userController = new UserController();
 const activyController = new ActivyController();
 const courseUnitController = new CourseUnitController();
@@ -18,29 +12,16 @@ const authenticateController = new AuthenticateController();
 
 const routes = Router();
 
-routes.get('/user', (request, response) => {
-    const {nome, idade} = request.query;
-    response.json({
-        idade,
-        nome
-    });
-});
+routes.post("/auth", authenticateController.create)
 
-routes.get('/user/:id/', (request, response) => {
-    const {id} = request.params;
-    response.json({
-        userId: id
-    });
-});
+routes.get("/user", authenticated, userController.show)
+routes.get("/activy", authenticated, activyController.show)
+routes.get("/courseunit", authenticated, courseUnitController.show)
 
-routes.post('/auth', authenticateController.create);
 
-routes.get('/user', userController.show);
-routes.get('/activy', activyController.show);
-routes.get('/courseunit', courseUnitController.show);
 
-routes.post('/user', userController.create);
-routes.post('/activy', authenticated, activyController.create);
-routes.post('/courseunit', authenticated, courseUnitController.create);
+routes.post("/user", userController.create);
+routes.post("/activy", authenticated, activyController.create);
+routes.post("/courseunit", authenticated, courseUnitController.create);
 
 export default routes;
